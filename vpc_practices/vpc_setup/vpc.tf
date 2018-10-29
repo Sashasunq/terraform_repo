@@ -1,49 +1,49 @@
-resource "aws_vpc" "prodVPC" {
+resource "aws_vpc" "masterVPC" {
   cidr_block           = "${var.vpc_prod_cidr}"
   enable_dns_hostnames = true
 
   tags {
-    Name = "prod"
+    Name = "master"
   }
 }
 
 ## Subnets
 
-resource "aws_subnet" "aws-subnet-prod-region-a" {
-  vpc_id            = "${aws_vpc.prodVPC.id}"
-  cidr_block        = "${var.vpc_prod_cidr_region_a}"
+resource "aws_subnet" "aws-subnet-master-region-a" {
+  vpc_id            = "${aws_vpc.masterVPC.id}"
+  cidr_block        = "${var.vpc_master_cidr_region_a}"
   availability_zone = "${var.aws_region}a"
 
   tags = {
-    Name = "prod-a"
+    Name = "master-a"
   }
 }
 
-resource "aws_subnet" "aws-subnet-prod-region-b" {
+resource "aws_subnet" "aws-subnet-master-region-b" {
   vpc_id            = "${aws_vpc.prodVPC.id}"
-  cidr_block        = "${var.vpc_prod_cidr_region_b}"
+  cidr_block        = "${var.vpc_master_cidr_region_b}"
   availability_zone = "${var.aws_region}b"
 
   tags = {
-    Name = "prod-b"
+    Name = "master-b"
   }
 }
 
-resource "aws_subnet" "aws-subnet-prod-region-c" {
-  vpc_id            = "${aws_vpc.prodVPC.id}"
-  cidr_block        = "${var.vpc_prod_cidr_region_c}"
+resource "aws_subnet" "aws-subnet-master-region-c" {
+  vpc_id            = "${aws_vpc.masterVPC.id}"
+  cidr_block        = "${var.vpc_master_cidr_region_c}"
   availability_zone = "${var.aws_region}c"
 
   tags = {
-    Name = "prod-c"
+    Name = "master-c"
   }
 }
 
 ## Internet gateway
 resource "aws_internet_gateway" "prod_gateway" {
-  vpc_id = "${aws_vpc.prodVPC.id}"
+  vpc_id = "${aws_vpc.masterVPC.id}"
 
   tags {
-    Name = "prod-gw"
+    Name = "master-gw"
   }
 }
