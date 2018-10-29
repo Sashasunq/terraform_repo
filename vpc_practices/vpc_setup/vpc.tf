@@ -1,5 +1,5 @@
 resource "aws_vpc" "masterVPC" {
-  cidr_block           = "${var.vpc_prod_cidr}"
+  cidr_block           = "${var.vpc_master_cidr}"
   enable_dns_hostnames = true
 
   tags {
@@ -20,7 +20,7 @@ resource "aws_subnet" "aws-subnet-master-region-a" {
 }
 
 resource "aws_subnet" "aws-subnet-master-region-b" {
-  vpc_id            = "${aws_vpc.prodVPC.id}"
+  vpc_id            = "${aws_vpc.masterVPC.id}"
   cidr_block        = "${var.vpc_master_cidr_region_b}"
   availability_zone = "${var.aws_region}b"
 
@@ -40,7 +40,7 @@ resource "aws_subnet" "aws-subnet-master-region-c" {
 }
 
 ## Internet gateway
-resource "aws_internet_gateway" "prod_gateway" {
+resource "aws_internet_gateway" "master_gateway" {
   vpc_id = "${aws_vpc.masterVPC.id}"
 
   tags {

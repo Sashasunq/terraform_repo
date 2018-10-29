@@ -5,7 +5,7 @@ variable "aws_region" {
 # Production
 
 variable "vpc_master_cidr" {
-  description = "CIDR for the prod VPC"
+  description = "CIDR for the master VPC"
   default     = "172.32.0.0/16"
 }
 
