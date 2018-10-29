@@ -1,6 +1,6 @@
 account.json
 .terraform
-*tfstate*
+tfstate
 setup/*
 crash.log
 dist
@@ -10,6 +10,6 @@ logs
 *.crt
 *.csr
 *.key
-*.pub
-*.pem
+.pub
+.pem
 *.swp
